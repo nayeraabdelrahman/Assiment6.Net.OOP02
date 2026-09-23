@@ -7,12 +7,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
         {
             #region Part 01 - Theoretical Questions
 
-            // ==========================================
-            // QUESTION 1
-            // ==========================================
-
             #region Question 1
-
             // a) What is the difference between a class and a struct?
             // Answer:
             // A class is a reference type, while a struct is a value type.
@@ -40,11 +35,6 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
 
             #endregion
-
-
-            // ==========================================
-            // QUESTION 2
-            // ==========================================
 
             #region Question 2
 
