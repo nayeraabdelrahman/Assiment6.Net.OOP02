@@ -19,9 +19,6 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             // ==========================================
 
             #region Properties
-
-            // TrackingCode Property Read-only from outside the struct.
-            //TrackingCode cannot be:null-empty- whitespace
             public string TrackingCode
             {
                 private set
@@ -56,7 +53,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             {
                 set
                 {
-                    if (weight > 0)
+                    if (value > 0)
                     {
                         weight = value;
                     }
@@ -70,7 +67,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             {
                 private set
                 {
-                    if (deliveryFee > 0)
+                    if (value > 0)
                     {
                         deliveryFee = value;
                     }
@@ -80,7 +77,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
             // EstimatedCost Read-only calculated property.
             // Return:DeliveryFee + (Weight * 5)
-            public decimal EstimatedCost
+            virtual public decimal EstimatedCost
             {
                 get
                 {
@@ -97,29 +94,24 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
         // Constructor 1 -Receives:trackingCode
         // Default values:Description = "Unknown"-Weight = 1-DeliveryFee = 50-Destination = default
-        public Shipment():this("Unknown","Unknown",1,50.0m,default)
+            public Shipment():this("Unknown","Unknown",1,50.0m,default)
             {
 
             }
-        public Shipment(string trackingCode)
+            public Shipment(string trackingCode) : this(trackingCode,"Unknown", 1,50.0m, default)
             {
-                this.trackingCode = trackingCode;
-                this.description = "Unknown";
-                this.weight = 1;
-                this.deliveryFee = 50.0m;
-                this.Destination = default;
-            }
 
+            }
 
             // Constructor 2-
             // Receives: trackingCode-description-weight-deliveryFee-destination
             public Shipment(string trackingCode, string description,
             decimal weight, decimal deliveryFee, DeliveryAddress Destination)
             {
-                this.trackingCode = trackingCode;
-                this.description = description;
-                this.weight = weight;
-                this.deliveryFee = deliveryFee;
+                TrackingCode = trackingCode;
+                Description = description;
+                Weight = weight;
+                DeliveryFee = deliveryFee;
                 this.Destination = Destination;
             }
 
