@@ -21,6 +21,22 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
         #endregion
         // ==========================================
+        // PROPERTIES
+        // ==========================================
+        #region Properties
+        public string CenterName
+        {
+            set
+            {
+                if (!string.IsNullOrWhiteSpace(value))
+                {
+                    centerName = value;
+                }
+            }
+            get { return centerName; }
+        }
+        #endregion
+        // ==========================================
         // CONSTRUCTOR
         // ==========================================
 
@@ -28,14 +44,12 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
         // Initialize the Shipment array
         // with a size of 20.
-
-
-        #endregion
         public DeliveryCenter()
         {
             shipments = new Shipment[20];
         }
 
+        #endregion
 
         // ==========================================
         // INTEGER INDEXER
@@ -79,9 +93,12 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             {
                 for (int i = 0; i < shipments.Length; i++)
                 {
-                    if (shipments[i].TrackingCode == trackingCode)
+                    if (shipments[i] != null)
                     {
-                        return shipments[i];
+                        if (shipments[i].TrackingCode == trackingCode)
+                        {
+                            return shipments[i];
+                        }
                     }
                 }
 
@@ -102,7 +119,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
         {
             for (int i = 0; i < shipments.Length; i++)
             {
-                if (shipments[i].TrackingCode == null)
+                if (shipments[i] == null)
                 {
                     shipments[i] = shipment;
                     return true;
@@ -111,6 +128,38 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             return false;
         }
 
+        // ------------------------------------------
+        // RemoveShipment
+        // ------------------------------------------
+        // Search using tracking code.
+        // If found: Remove shipment - Return true.
+        // If not found:Return false.
+        public bool RemoveShipment(string trackingCode)
+        {
+           for(int i = 0;i < shipments.Length; i++)
+            {
+                if (shipments[i] != null && shipments[i].TrackingCode == trackingCode)
+                {
+                    shipments[i] = null;
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
+        // ------------------------------------------
+        // PrintAllShipments
+        // ------------------------------------------
+
+        // Print all stored shipments.
+        public void PrintAllShipments()
+        {
+            for (int i = 0; i < shipments.Length; i++)
+            {
+                if (shipments[i] != null) { shipments[i].PrintShipment(); }
+            }
+        }
 
         #endregion
     }

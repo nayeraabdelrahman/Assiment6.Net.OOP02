@@ -81,7 +81,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
             #region Q1 - Create DeliveryCenter
 
-
+            DeliveryCenter deliveryCenter = new DeliveryCenter();
 
             #endregion
 
@@ -93,7 +93,8 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
 
             #region Q2 - Read Center Name
 
-
+            string centerName = Console.ReadLine()??"";
+            deliveryCenter.CenterName = centerName;
 
             #endregion
 
