@@ -86,7 +86,23 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             DestinationCountry = destinationCountry;
             CustomsFee = customsFee;
         }
+        #endregion
+        // ==========================================
+        // Methods
+        // ==========================================
 
+        #region Methods
+        override public void PrintShipment()
+        {
+            Console.WriteLine($"Tracking Code: {TrackingCode}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Weight: {Weight} Kg");
+            Console.WriteLine($"Delivery Fee: {DeliveryFee} EGP");
+            Console.WriteLine($"Destination Country : {DestinationCountry}");
+            Console.WriteLine($"Customs Fee: {CustomsFee} EGP");
+            Console.WriteLine($"Estimated Cost: {EstimatedCost}");
+
+        }
         #endregion
     }
 

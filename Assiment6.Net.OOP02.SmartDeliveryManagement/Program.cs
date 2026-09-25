@@ -75,137 +75,193 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             #region Part 02 - Practical
 
             // ==========================================
-            // QUESTION 1
             // Create a DeliveryCenter.
             // ==========================================
 
-            #region Q1 - Create DeliveryCenter
+            #region Create DeliveryCenter
 
             DeliveryCenter deliveryCenter = new DeliveryCenter();
 
             #endregion
 
 
-            // ==========================================
-            // QUESTION 2
+            // =========================================
             // Read the center name from the user.
             // ==========================================
 
-            #region Q2 - Read Center Name
-
+            #region Read Center Name
+            Console.WriteLine("Enter Delivery Center Name :");
             string centerName = Console.ReadLine()??"";
             deliveryCenter.CenterName = centerName;
-
+            Console.WriteLine("==========================================");
+            Console.WriteLine($"Delivery Center : {centerName}");
+            Console.WriteLine("==========================================");
             #endregion
 
 
             // ==========================================
-            // QUESTION 3
             // Create one StandardShipment.
             // ==========================================
 
-            #region Q3 - Standard Shipment
+            #region  Standard Shipment
 
-
-
+            StandardShipment standardShipment;
+            Console.WriteLine("Tracking Code : ");
+            string trackingCode = ReadValidString("Tracking Code");
+            Console.WriteLine("Description :");
+            string description = ReadValidString("Description");
+            Console.WriteLine("Weight :");
+            decimal weight= ReadValidDecimal("Weight");
+            Console.WriteLine("Delivery Fee :");
+            decimal deliveryFee = ReadValidDecimal("Delivery Fee");
+            standardShipment = new StandardShipment(trackingCode, description, weight, deliveryFee,default);
             #endregion
 
 
             // ==========================================
-            // QUESTION 4
             // Create one ExpressShipment.
             // ==========================================
 
-            #region Q4 - Express Shipment
+            #region Express Shipment
 
-
+            ExpressShipment expressShipment;
+            Console.WriteLine("Tracking Code : ");
+             trackingCode = ReadValidString("Tracking Code");
+            Console.WriteLine("Description :");
+            description = ReadValidString("Description");
+            Console.WriteLine("Weight :");
+            weight = ReadValidDecimal("Weight");
+            Console.WriteLine("Delivery Fee :");
+            deliveryFee = ReadValidDecimal("Delivery Fee");
+            Console.WriteLine("Extra Fee :");
+            decimal extraFee = ReadValidDecimal("Extra Fee");
+            expressShipment = new ExpressShipment(trackingCode, description, weight, deliveryFee,default ,extraFee);
 
             #endregion
 
 
             // ==========================================
-            // QUESTION 5
             // Create one InternationalShipment.
             // ==========================================
 
-            #region Q5 - International Shipment
-
-
+            #region International Shipment
+            InternationalShipment internationalShipment;
+            Console.WriteLine("Tracking Code : ");
+            trackingCode = ReadValidString("Tracking Code");
+            Console.WriteLine("Description :");
+            description = ReadValidString("Description");
+            Console.WriteLine("Weight :");
+            weight = ReadValidDecimal("Weight");
+            Console.WriteLine("Delivery Fee :");
+            deliveryFee = ReadValidDecimal("Delivery Fee");
+            Console.WriteLine("Destination Country :");
+            String destinationCountry = ReadValidString("Destination Country");
+            Console.WriteLine("Customs Fee :");
+            decimal customsFee = ReadValidDecimal("Customs Fee");
+            internationalShipment = new InternationalShipment(trackingCode, description, weight, deliveryFee, default, destinationCountry, customsFee);
 
             #endregion
 
-
             // ==========================================
-            // QUESTION 6
-            // Read all shipment data from the user.
-            // ==========================================
-
-            #region Q6 - Read Shipment Data
-
-
-
-            #endregion
-
-
-            // ==========================================
-            // QUESTION 7
             // Add the shipments to the delivery center.
             // ==========================================
 
             #region Q7 - Add Shipments
-
-
-
-            #endregion
-
-
-            // ==========================================
-            // QUESTION 8
-            // Print all shipments.
-            // ==========================================
-
-            #region Q8 - Print All Shipments
-
+            deliveryCenter.AddShipment(standardShipment);
+            deliveryCenter.AddShipment(expressShipment);
+            deliveryCenter.AddShipment(internationalShipment);
 
 
             #endregion
 
 
             // ==========================================
-            // QUESTION 9
-            // Search for a shipment using the existing
-            // tracking code indexer.
+            //Print all shipments.
             // ==========================================
 
-            #region Q9 - Search Shipment
+            #region  Print All Shipments
 
-
+            deliveryCenter.PrintAllShipments();
 
             #endregion
 
 
             // ==========================================
-            // QUESTION 10
+            // Search for a shipment using the existing tracking code indexer.
             // Remove one shipment using its tracking code.
             // ==========================================
 
-            #region Q10 - Remove Shipment
+            #region Search & Remove Shipment
 
-
+            Console.WriteLine("Enter Tracking Code to Remove :");
+            trackingCode = ReadValidString("TrackingCode");
+            Shipment Current = deliveryCenter[trackingCode];
+            if (Current == null)
+            {
+                Console.WriteLine("Shipment is not Found");
+            }
+            else { deliveryCenter.RemoveShipment(trackingCode); }
 
             #endregion
 
 
             // ==========================================
-            // QUESTION 11
             // Print the remaining shipments.
             // ==========================================
 
-            #region Q11 - Print Remaining Shipments
-
-
+            #region Print Remaining Shipments
+            Console.WriteLine("======================================");
+            Console.WriteLine("Remaining Shipments");
+            Console.WriteLine("======================================");
+            deliveryCenter.PrintAllShipments();
 
             #endregion
+
+            #endregion
+
+            //validationMethods
+            #region Validation Methods
+            static string ReadValidString(string message)
+            {
+                string input;
+                do
+                {
+                    input = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(input))
+                    {
+                        Console.WriteLine($"{message} cannot be empty or whitespace. Please enter a valid {message}.");
+                    }
+                } while (string.IsNullOrWhiteSpace(input));
+                return input;
+            }
+            static decimal ReadValidDecimal(string message)
+            {
+                decimal value;
+                bool isValid = false;
+                if (message.ToLower() == "weight" || message.ToLower() == "delivery fee")
+                {     do
+                    {
+                        isValid = decimal.TryParse(Console.ReadLine(), out value);
+                        if (!isValid || value <= 0)
+                        {
+                            Console.WriteLine($"{message} must be a positive number. Please enter a valid {message}.");
+                        }
+                    } while (!isValid || value <= 0);
+
+                }
+                else
+                {
+                    do
+                    {
+                        isValid = decimal.TryParse(Console.ReadLine(), out value);
+                        if (!isValid || value < 0)
+                        {
+                            Console.WriteLine($"{message} must be a positive number. Please enter a valid {message}.");
+                        }
+                    } while (!isValid || value < 0);
+                }
+                return value;
+            }
 
             #endregion
         }

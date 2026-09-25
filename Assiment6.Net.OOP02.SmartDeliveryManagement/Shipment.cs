@@ -138,7 +138,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
             // DeliveryFee
             // Destination
             // EstimatedCost
-            public void PrintShipment()
+            virtual public void PrintShipment()
             {
                 Console.WriteLine($"Tracking Code: {TrackingCode}");
                 Console.WriteLine($"Description: {Description}");

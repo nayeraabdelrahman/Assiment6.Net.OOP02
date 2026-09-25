@@ -122,6 +122,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
                 if (shipments[i] == null)
                 {
                     shipments[i] = shipment;
+                    Console.WriteLine("Shipment Added Successfully");
                     return true;
                 }
             }
@@ -141,6 +142,7 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
                 if (shipments[i] != null && shipments[i].TrackingCode == trackingCode)
                 {
                     shipments[i] = null;
+                    Console.WriteLine("Shipment removed successfully");
                     return true;
                 }
             }
@@ -157,7 +159,9 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
         {
             for (int i = 0; i < shipments.Length; i++)
             {
-                if (shipments[i] != null) { shipments[i].PrintShipment(); }
+                if (shipments[i] != null) {
+                    Console.WriteLine(shipments[i].GetType().Name + ":");
+                    shipments[i].PrintShipment(); }
             }
         }
 

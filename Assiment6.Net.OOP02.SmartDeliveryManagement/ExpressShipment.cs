@@ -66,9 +66,23 @@ namespace Assiment6.Net.OOP02.SmartDeliveryManagement
         {
             ExtraFee = extraFee;
         }
-
-
         #endregion
 
+        // ==========================================
+        // Methods
+        // ==========================================
+
+        #region Methods
+        override public void PrintShipment()
+        {
+            Console.WriteLine($"Tracking Code: {TrackingCode}");
+            Console.WriteLine($"Description: {Description}");
+            Console.WriteLine($"Weight: {Weight} Kg");
+            Console.WriteLine($"Delivery Fee: {DeliveryFee} EGP");
+            Console.WriteLine($"Extra Fee: {ExtraFee} EGP");
+            Console.WriteLine($"Estimated Cost: {EstimatedCost}");
+
+        }
+        #endregion
     }
 }
